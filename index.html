@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>qwe</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<script defer src="js/libs/router.js" type="module"></script>
+<script defer src="js/main.js" type="module"></script>
+
+<main>
+
+    <div id="app">
+
+        <div id="header">
+            <router-link to="/login">Вход</router-link>
+            <router-link to="/users">Сотрудники</router-link>
+            <router-link to="/sheets">Смены</router-link>
+        </div>
+        <hr>
+
+        <router-view></router-view>
+
+
+    </div>
+
+
+</main>
+
+</body>
+</html>
