@@ -39,7 +39,6 @@ class RouterView extends HTMLElement {
             this.append(e.detail);
         })
     }
-
 }
 
 class RouterLink extends HTMLElement {

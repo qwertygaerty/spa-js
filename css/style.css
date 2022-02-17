@@ -1,7 +1,6 @@
  * {
      font-family: Bahnschrift, sans-serif;
  }
-
  main {
      display: flex;
      width: 100%;
@@ -16,7 +15,6 @@
      overflow: hidden;
      padding: 10vh;
  }
-
 
  router-link {
      cursor: pointer;
@@ -35,7 +33,6 @@
      z-index: 0;
  }
 
-
  router-link::before {
      content: "";
      position: absolute;
@@ -52,7 +49,6 @@
  router-link:hover::before {
      transform: scale(2);
  }
-
 
  router-link:hover {
      color: #eeeeee;
@@ -165,5 +161,41 @@
      color: #252525;
  }
  .disabled-block {
+     display: none;
+ }
+
+ .my-div {
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 100%;
+     width: 100%;
+     background: #252525;
+     color: white;
+     padding: 2vh;
+     overflow: hidden;
+ }
+
+ .my-div label {
+      width: 70vw;
+     border: white;
+ }
+
+ .my-div::before {
+     content: "";
+     position: absolute;
+     bottom: -700px;
+     right: -700px;
+     width: 1400px;
+     height: 1400px;
+     background: white;
+     border-radius: 50%;
+ }
+
+ body {
+     overflow-x: hidden;
+ }
+
+ .none {
      display: none;
  }
