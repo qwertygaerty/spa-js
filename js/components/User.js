@@ -17,31 +17,49 @@ export default class User extends HTMLElement {
             position:"",
         }
         this.service = null;
-
+        this.render();
     }
 
     connectedCallback() {
-        if (!this.rendered) {
+        if (!this.rendered && this.user) {
             this.render();
         }
     }
 
-    bind() {
+   bind() {
         bindEvents("UserLogin", "user-login", (e) => {
             this.user = e.detail;
             this.render();
         })
         bindEvents("UserOut", "user-logout", (e) => {
             this.user = null;
+            this.innerHTML = "";
         })
+
+        bindEvents("UserCab", "user-cab", (e) => {
+           this.getUserCab();
+        })
+
     }
 
+   async getUserCab() {
+        this.innerHTML = "";
+        let res = await f("servicerecord", "get", this.user.user_token);
+        console.log(res)
+        this.registrations = res.results;
+        for (let reg of this.registrations) {
+            this.innerHTML += (getTemplateCab(reg))
+        }
+        this.attachModel();
+    }
+
+
     async render() {
+        this.innerHTML = "";
         if (!this.user) return;
         this.rendered = true;
         let res = await f("servicerecord", "get", this.user.user_token);
         console.log(res)
-
         this.registrations = res.results;
         for (let reg of this.registrations) {
             this.innerHTML += (getTemplateCab(reg))

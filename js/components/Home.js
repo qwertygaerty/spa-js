@@ -16,12 +16,14 @@ export default class Home extends HTMLElement {
             description:"",
             position:"",
         }
-        this.service = null;
+        this.s = {
+            service: null
+        };
 
     }
 
     connectedCallback() {
-        if (!this.rendered) {
+        if (!this.rendered && this.user) {
             this.render();
         }
     }
@@ -33,10 +35,12 @@ export default class Home extends HTMLElement {
         })
         bindEvents("UserHomeOut", "user-logout", (e) => {
             this.user = null;
+            this.innerHTML = "";
         })
     }
 
     async render() {
+        this.innerHTML = "";
         if (!this.user) return;
         this.rendered = true;
         let res = (await f("service", "get", this.user.user_token)).data;
@@ -71,11 +75,13 @@ export default class Home extends HTMLElement {
     }
 
     async register(e) {
-        this.service = e.target.dataset.service
-        let res = await f("servicerecord", "post", this.user.user_token, this.data)
+        this.s.service = e.target.dataset.service
+        let res = await f("servicerecord", "post", this.user.user_token, this.s)
         console.log(res)
         e.target.innerHTML = "Записано"
         e.target.classList.add("disabled")
+
+        dEvent("user-cab",{status: "update"});
     }
 
     async restore(e) {
@@ -84,6 +90,8 @@ export default class Home extends HTMLElement {
         console.log(res)
         let el = document.getElementById(id);
         el.classList.add("disabled-block");
+
+        dEvent("user-cab",{status: "update"});
     }
 
     put(e) {
@@ -95,6 +103,7 @@ export default class Home extends HTMLElement {
         div.innerHTML = getTemplateRegistration(el);
         this.append(div);
         this.attachModel();
+
     }
     async change(e) {
         console.log(this.data)
@@ -111,7 +120,9 @@ export default class Home extends HTMLElement {
 
         let div = document.getElementsByClassName("my-div")[0];
 
-        div.classList.add("none")
+        div.classList.add("none");
+
+        dEvent("user-cab",{status: "update"});
 
     }
 
