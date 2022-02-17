@@ -58,7 +58,6 @@ export default class Home extends HTMLElement {
     async register(e) {
         this.data.service = e.target.dataset.service
         let res = await f("servicerecord","post", this.user.user_token,this.data)
-
         console.log(res)
         e.target.innerHTML = "Записано"
         e.target.classList.add("disabled")
@@ -68,12 +67,13 @@ export default class Home extends HTMLElement {
         let id = e.target.dataset.id;
         let res = await f(`service/${id}`,"delete", this.user.user_token,null);
         console.log(res)
-
-
         let el = document.getElementById(id);
 
         el.classList.add("disabled-block");
     }
 
+    async put(e) {
 
+        let id = e.target.dataset.id;
+    }
 }

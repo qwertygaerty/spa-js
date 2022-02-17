@@ -4,7 +4,6 @@ import Router from "./libs/router.js";
 import LoginForm from "./components/LoginForm.js";
 import Home from "./components/Home.js";
 
-
 class App {
 
 }
